@@ -8,7 +8,7 @@ docker-compose -f docker-compose-rabbitmq.yml up -d
 
 #### 3. Run `start_app2.sh` located in the spring-spring-receiver folder to start app2.
 
-#### Grant execute permission to the owner of the file with this command:
+#### If you encounter permission issues, grant execute permission to the owner of the file with this command:
 ```dockerfile
 chmod +x start_app1.sh
 chmod +x start_app2.sh
