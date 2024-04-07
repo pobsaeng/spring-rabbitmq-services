@@ -1,6 +1,6 @@
 # Start applications locally
 
-#### 1. Run Docker Compose:
+#### 1. Run Docker Compose for RabbitMQ:
 ```dockerfile
 docker-compose -f docker-compose-rabbitmq.yml up -d
 ```
