@@ -1,0 +1,20 @@
+CREATE TABLE Product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(1000),
+    price DECIMAL(10, 2) NOT NULL,
+    currency VARCHAR(3) DEFAULT 'USD',
+    quantity INT DEFAULT 0,
+    category VARCHAR(100),
+    brand VARCHAR(100),
+    color VARCHAR(50),
+    size VARCHAR(20),
+    weight DECIMAL(10, 2),
+    length DECIMAL(10, 2),
+    width DECIMAL(10, 2),
+    height DECIMAL(10, 2),
+    image_url text,
+    tag VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

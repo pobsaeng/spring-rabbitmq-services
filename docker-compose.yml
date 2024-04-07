@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: "rabbitmq:management"
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672" # RabbitMQ standard port
+      - "15672:15672" # RabbitMQ management UI port
+    networks:
+      - microservice_network
+
+  service1:
+    build:
+      context: ./spring-rabbitmq-h2
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - RABBITMQ_HOST=rabbitmq # `rabbitmq` is the host name for RabbitMQ
+    depends_on:
+      - rabbitmq
+    networks:
+      - microservice_network
+
+  service2:
+    build:
+      context: ./spring-receiver
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+    networks:
+      - microservice_network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - service1
+    networks:
+      - microservice_network
+
+networks:
+  microservice_network:
+    driver: bridge
